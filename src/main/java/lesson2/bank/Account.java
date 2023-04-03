@@ -55,7 +55,7 @@ public class Account {
     // возвращаем баланс счета
     // при попытке списать больше чем есть на счете - печатать сообщение
     public int transfer(Account account, int amount) {
-
+        return 0;
     }
 
 }
