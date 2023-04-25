@@ -74,6 +74,7 @@ public class MyArrayList implements MyList {
 
         // наконец, поместим в позицию index переданное значение
         data[index] = value;
+        size++;
     }
 
     private void increaseCapascity() {
@@ -93,5 +94,18 @@ public class MyArrayList implements MyList {
             data[i - 1] = data[i];
         }
         size--;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            if (i != 0) {
+                b.append(", ");
+            }
+            b.append(data[i]);
+        }
+        b.append(']');
+        return b.toString();
     }
 }

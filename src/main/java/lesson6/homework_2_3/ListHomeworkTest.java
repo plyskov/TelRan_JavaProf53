@@ -2,6 +2,7 @@ package lesson6.homework_2_3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ListHomeworkTest {
@@ -24,6 +25,13 @@ public class ListHomeworkTest {
         System.out.println("Before clearing duolicates: " + toCollapse);
         clearDuplicates(toCollapse);
         System.out.println("After clearing duolicates: " + toCollapse);
+
+        // Задание 3 (очистить дубли из списка) - тест опитимизированного:
+        List<String> ll = new ArrayList<>(
+                Arrays.asList("Dima", "Max", "Alina", "Dima", "Alexander", "Max")
+        );
+        removeDuplicates(ll);
+        System.out.println(ll);
 
     }
 
@@ -57,6 +65,27 @@ public class ListHomeworkTest {
         }
         lst.clear(); // Имхо, правильнее всегда возвращать новый объект, а не замещать переданный. Но пусть будет так.
         lst.addAll(unique);
+    }
+
+    /*
+    3*. ОПТИМИЗИРОВАННЫЙ - сперва сортируем, затем сравниваем последовательно-попарно, одинаковые удаляем
+    Напишите функцию, удаляющие дубликаты из передаваемого в нее списка
+    ["Dima", "Sam", "Dima", "Alina"] -> ["Dima", "Sam", "Alina"]
+     */
+    private static List<String> removeDuplicates(List<String> l) {
+
+        Collections.sort(l); /// сортируем список
+
+        String current = l.get(l.size() - 1);
+
+        for (int i = l.size() - 2; i >= 0 ; i--) {
+            if (l.get(i).equals(current)) {
+                l.remove(i);
+            } else
+                current = l.get(i);
+        }
+
+        return l;
     }
 
 }
