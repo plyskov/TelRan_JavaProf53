@@ -1,9 +1,37 @@
 package lesson6.list;
 
-public class MyArrayList implements MyList {
+import java.util.Iterator;
+
+public class MyArrayList implements MyList, Iterable<Integer> {
 
     // Внутри физически это будет массив из целых, и у него будет начальная емкость.
     // далее она будет увеличиваться
+
+    // Итератор - делаем свой
+    @Override
+    public Iterator<Integer> iterator() {
+        // если hasNext() == true, то можно вызвать next()
+        // реализация итератора через анонимный внутренний класс
+        return new Iterator<Integer>() {
+             // позиция итератора по умолчанию
+            private int position = -1;
+            @Override
+            public boolean hasNext() {
+                return ++position < size; // инкрементируем позицию итератора и провряем, что не дошли до конца контейнера
+            }
+
+            @Override
+            public Integer next() {
+                return get(position);
+            }
+
+            @Override
+            public void remove() {
+                MyArrayList.this.remove(position--); // удаляем элемент и смещаем позицию итератора назад на 1
+
+            }
+        };
+    }
 
     private static final int INITIAL_SIZE = 8; // начальная емкость
     private int size = 0; // длина контейнера
