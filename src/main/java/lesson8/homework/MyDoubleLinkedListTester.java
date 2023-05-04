@@ -25,5 +25,13 @@ public class MyDoubleLinkedListTester {
 
         l.remove(2);
         System.out.println(l);
+
+        l.addFirst(-3);
+        l.addLast(100500);
+        System.out.println(l);
+
+        l.removeFirst();
+        l.removeLast();
+        System.out.println(l);
     }
 }

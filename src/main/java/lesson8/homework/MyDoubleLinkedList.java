@@ -24,10 +24,19 @@ public class MyDoubleLinkedList implements MyList {
     private Node getNodeByIndex(int index) {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
-        Node n = head;
-        while (n != null && index > 0) {
-            index--;
-            n = n.next;
+        Node n;
+        if (index < size / 2) {
+            n = head;
+            while (n != null && index > 0) {
+                index--;
+                n = n.next;
+            }
+        } else {
+            n = tail;
+            while (n != null && index < (size - 1)) {
+                index++;
+                n = n.prev;
+            }
         }
         return n;
     }
@@ -85,7 +94,7 @@ public class MyDoubleLinkedList implements MyList {
             return;
         }
 
-        if (index == 0) { // вставка в начао на место head
+        if (index == 0) { // вставка в начало на место head
             Node n = new Node(head, null, value);
             head = n;
         } else if (index == size()) { // вставка на последнее место после tail
@@ -125,27 +134,31 @@ public class MyDoubleLinkedList implements MyList {
     }
 
     public int getFirst() {
-        return 0;
+        return get(0);
     }
 
     public int getLast() {
-        return 0;
+        return get(size - 1);
     }
 
     public int removeFirst() {
-        return 0;
+        int value = getFirst();
+        remove(0);
+        return value;
     }
 
     public int removeLast() {
-        return 0;
+        int value = getLast();
+        remove(size - 1);
+        return value;
     }
 
     public void addFirst(int value) {
-
+        add(0, value);
     }
 
     public void addLast(int value) {
-
+        add(size, value);
     }
 
 
