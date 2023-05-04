@@ -1,8 +1,68 @@
 package lesson6.list;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class MyArrayList implements MyList, Iterable<Integer> {
+
+    // Домашняя работа
+    // 2. Написать функцию в MyArrayList, возвращающую итератор, обходящий контейнер по возрастанию значений элементов
+    //    порядок элементов в контейнере меняться не должен
+    public Iterator<Integer> smallToBigIterator()
+    {
+        return new SmallToBigIterator();
+    }
+
+    public class SmallToBigIterator implements Iterator<Integer> {
+
+        // массив с данными для итератора
+        private  int [] source = new int[size];
+        // позиция итератора
+        private int position = -1;
+
+        public SmallToBigIterator () {
+            // Скопировать данные из массива data в массив source
+            // и отсортировать данные в source
+            System.arraycopy(data, 0, source, 0, size); // Работает быстрее копирования в цикде
+            Arrays.sort(source);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return ++position < size;
+        }
+
+        @Override
+        public Integer next() {
+            if(position < 0 || position >= size)
+                throw new NoSuchElementException();
+            return source[position];
+        }
+
+    }
+
+
+    // Домашняя работа - от преподавателя. Обратный итератор.
+    // 1. Написать функцию в MyArrayList, возвращающую итератор, обходящий контейнер в обратном порядке
+    public Iterator<Integer> backwardIterator() {
+
+        // Это анонимный внутренний класс. Мы создаем экземпляр класса прямо в момент его объявления
+        return new Iterator<Integer> () {
+
+            private int position = size; // Начальная позиция - в конце листа
+
+            @Override
+            public boolean hasNext() {
+                return --position >= 0; // Уменьшаем позицию и проверяем, не дошли ли до нуля
+            }
+
+            @Override
+            public Integer next() {
+                return get(position);
+            }
+        };
+    }
 
     // Внутри физически это будет массив из целых, и у него будет начальная емкость.
     // далее она будет увеличиваться

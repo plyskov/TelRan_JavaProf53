@@ -1,5 +1,7 @@
 package lesson6.list;
 
+import java.util.Iterator;
+
 public class MyArrayListTester {
     public static void main(String[] args) {
         MyArrayList list = new MyArrayList();
@@ -21,8 +23,19 @@ public class MyArrayListTester {
 
         list.remove(2);
         list.remove(1);
-        list.remove(0);
+
+        // Проверяем обратный итератор
+        Iterator<Integer> backwardIterator = list.backwardIterator();
+        while (backwardIterator.hasNext())
+            System.out.println("<" + backwardIterator.next() + ">");
+
+        list.add(-10);
         System.out.println(list);
+
+        Iterator<Integer> minToMax = list.smallToBigIterator();
+        while (minToMax.hasNext())
+            System.out.println("(" + minToMax.next() + ")");
+
 
     }
 }
