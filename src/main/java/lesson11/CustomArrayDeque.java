@@ -77,16 +77,26 @@ public class CustomArrayDeque implements CustomDeque {
 
     @Override
     public void addLast(int value) {
+        if (size() == source.length) {
+            increaseCapacity();
+        }
 
+        source[(firstElementIndex + size) % source.length] = value;
+        size++;
     }
 
     @Override
     public int getLast() {
-        return 0;
+        if (size() == 0)
+            throw new IndexOutOfBoundsException();
+
+        return source[(firstElementIndex + size - 1) % source.length];
     }
 
     @Override
     public int removeLast() {
-        return 0;
+       int value = getLast();
+       size--;
+       return value;
     }
 }
