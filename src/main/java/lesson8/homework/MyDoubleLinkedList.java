@@ -158,7 +158,7 @@ public class MyDoubleLinkedList implements MyList {
     }
 
     public void addLast(int value) {
-        add(size, value);
+        add(value);
     }
 
 

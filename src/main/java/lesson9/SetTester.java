@@ -35,7 +35,7 @@ public class SetTester {
 
         // у TreeSet есть возможноость отфильтровать
         Set<String> slice =  groupsTree.subSet("C", "R");
-        System.out.println(slice);
+        System.out.println("slice: " + slice);
 
         //groupsTree.floor("C"); // все что меньше
         //groupsTree.ceiling("G"); // все что больше
